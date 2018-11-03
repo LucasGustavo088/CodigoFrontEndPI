@@ -1,5 +1,7 @@
 package inter;
 import lexer.*;
+
+//Classe para representar os não terminais
 public class Node {
 	int lexline = 0;
 	Node() { lexline = Lexer.line; }

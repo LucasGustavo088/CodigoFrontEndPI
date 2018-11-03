@@ -6,6 +6,7 @@ import symbols.*;
 
 public class Lexer {
 	public static int line = 1;
+	//Char responsável por alocar cada carácter do código inserido
 	char peek = ' ';
 	
 	Hashtable words = new Hashtable();
@@ -20,6 +21,7 @@ public class Lexer {
 		reserve (new Word("while", 	Tag.WHILE));
 		reserve (new Word("do", 	Tag.DO));
 		reserve (new Word("break", 	Tag.BREAK));
+		reserve (new Word("exit", 	Tag.EXIT));
 		reserve (Word.True);
 		reserve (Word.False);
 		reserve (Type.Int);

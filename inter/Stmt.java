@@ -1,5 +1,6 @@
 package inter;
 
+//Classe responsável por realizar toda a declaração de valores a variáveis.
 public class Stmt extends Node {
 	public static Stmt Null = new Stmt();
 	

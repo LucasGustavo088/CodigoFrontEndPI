@@ -1,6 +1,7 @@
 package inter;
 import lexer.*; import symbols.*;
 
+//Classe responsável por representar as expressões
 public class Expr extends Node {
 	public Token op;
 	public Type type;

@@ -6,7 +6,7 @@ import symbols.*;
 import inter.*;
 
 public class Parser {
-
+	
 	private Lexer lex;
 	private Token look;
 	Env top = null;
@@ -25,6 +25,7 @@ public class Parser {
 		throw new Error("near line " + lex.line + ": " + s);
 	}
 	
+	//Método responsável por verificar se o valor que está no look de token atual é valido e se caso esteja, obter o proximo look de token
 	void match(int t) throws IOException{
 		if(look.tag == t)
 			move();
@@ -54,6 +55,7 @@ public class Parser {
 	
 	void decls() throws IOException {
 		while( look.tag == Tag.BASIC ) {
+			//Obter o tipo da declaração e verificar se realmente pertence aos tipos definidos pela linguagem
 			Type p = type();
 			Token tok = look;
 			match(Tag.ID);
@@ -125,6 +127,9 @@ public class Parser {
 		case Tag.BREAK:
 			match(Tag.BREAK); match(';');
 			return new Break();
+		case Tag.EXIT:
+			match(Tag.EXIT); match(';');
+			return new Exit();
 		case '{':
 			return block();
 		default:
