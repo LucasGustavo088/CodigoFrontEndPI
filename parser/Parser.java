@@ -107,6 +107,9 @@ public class Parser {
 			match(Tag.ELSE);
 			s2 = stmt();
 			return new Else(x, s1, s2);
+		case Tag.TERNARIO:
+			match(Tag.TERNARIO); match('('); x = bool(); match('?'); s1 = stmt(); match(':'); s2 = stmt(); match(')');
+			return new Ternario(x, s1, s2);	
 		case Tag.WHILE:
 			While whilenode = new While();
 			savedStmt = Stmt.enclosing; Stmt.enclosing = whilenode;
@@ -127,9 +130,6 @@ public class Parser {
 		case Tag.BREAK:
 			match(Tag.BREAK); match(';');
 			return new Break();
-		case Tag.EXIT:
-			match(Tag.EXIT); match(';');
-			return new Exit();
 		case '{':
 			return block();
 		default:

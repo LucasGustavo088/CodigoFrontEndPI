@@ -23,7 +23,8 @@ public class Tag {
 		TEMP = 273,
 		TRUE = 274,
 		WHILE = 275,
-		EXIT = 276;
+		EXIT = 276,
+		TERNARIO = 277;
 	
 	
 }
