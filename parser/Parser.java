@@ -107,9 +107,9 @@ public class Parser {
 			match(Tag.ELSE);
 			s2 = stmt();
 			return new Else(x, s1, s2);
-		case Tag.TERNARIO:
-			match(Tag.TERNARIO); match('('); x = bool(); match('?'); s1 = stmt(); match(':'); s2 = stmt(); match(')');
-			return new Ternario(x, s1, s2);	
+		/*case Tag.TERNARIO:
+			match(Tag.TERNARIO); match('('); x = bool(); match('?'); s1 = assignSemPontoEVirgula(); match(':'); s2 = assignSemPontoEVirgula(); match(')');
+			return new Ternario(x, s1, s2);*/	
 		case Tag.WHILE:
 			While whilenode = new While();
 			savedStmt = Stmt.enclosing; Stmt.enclosing = whilenode;
@@ -145,6 +145,21 @@ public class Parser {
 		if(id == null) error(t.toString() + " undeclared");
 		if( look.tag == '=') {
 			move();
+			if(look.tag == Tag.TERNARIO) {
+				Expr x;
+				Stmt s, s1, s2;
+				Stmt savedStmt;
+				match(Tag.TERNARIO); 
+				match('('); 
+				x = bool(); 
+				match('?'); 
+				s1 = assignSemPontoEVirgula(id); 
+				match(':'); 
+				s2 = assignSemPontoEVirgula(id); 
+				match(')');
+				return new Ternario(x, s1, s2);	
+			}
+				
 			stmt = new Set(id, bool());
 		}else {
 			Access x = offset(id);
@@ -153,6 +168,19 @@ public class Parser {
 		}
 		
 		match(';');
+		return stmt;
+	}
+	
+	Stmt assignSemPontoEVirgula(Id id) throws IOException{
+		Stmt stmt;
+
+		if(id == null) {
+			error(id.toString() + " undeclared");
+		}
+		
+		stmt = new Set(id, bool());
+		
+		
 		return stmt;
 	}
 	
