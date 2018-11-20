@@ -6,7 +6,7 @@ public class Exit extends Stmt{
 	
 	public Exit() {
 		if(Stmt.enclosing == null)
-			error("unenclosed exit");
+			error("exit não fechado");
 		
 		stmt = Stmt.enclosing;
 	}
